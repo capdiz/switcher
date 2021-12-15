@@ -1,0 +1,20 @@
+---
+output_msgs:  
+  motherdir_exists_msg: "A switcher application with the same single-mother directory name already exists."
+  services_dir_exists_msg: "A services directory already exists with the following APIs:"
+  creating_service_dir_msg: "Creating services directory..."
+  load_script_msg: "Creating load script..."
+  deploy_script_msg: "Creating deploy script..."
+  run_test_script_msg: "Creating run_test script..."
+  deleting_load_script: "Deleting load script..."
+  deleting_deploy_script: "Deleting deploy script..."
+  deleting_run_test_script: "Deleting run_test script..."
+  deleted_load_script: "Successfully deleted load script..."
+  deleted_deploy_script: "Successfully deleted deploy script..."
+  deleted_run_test_script: "Successfully deleted run_test script..."
+queries:
+  replace_motherdir: "Would you like to replace it?"
+  create_service: "Would you like to setup an API now?"
+  service_name: "Enter your service name: "
+  delete_services: "The available APIs will be deleted. Would you like to proceed?"
+  setup_db: "Would you like to setup a postgres database?"
