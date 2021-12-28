@@ -28,7 +28,7 @@ module Switcher
             return motherdir
           else
             service_dir = path.ascend do |dir|
-              break true if dir.directory? && dir.basename == "services"
+              break true if dir.directory? && dir.basename.to_s == "services"
             end
             if service_dir.class.to_s == "Boolean"
               return service_dir
