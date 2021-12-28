@@ -1,4 +1,6 @@
 require 'find'
+require 'pathname'
+
 module Switcher
   module Generators
     module Service
