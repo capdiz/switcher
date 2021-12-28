@@ -16,7 +16,23 @@ module Switcher
         end
       end  
 
+      def create_service
+        if service_exists?(service_name)
+        else
+        end
+      end
+
       protected
+      def create_api
+        if service_exists?
+          say(MESSAGES["output_msgs"]["service_api_exists"], :green)
+          query = ask(MESSAGES["queries"]["replace_service_query"], limited_to: OPTIONS)
+          unless query == "n" 
+          end
+        else
+        end
+      end
+
       def overwrite_motherdir
         say(MESSAGES["output_msgs"]["motherdir_exists_msg"], :green)
         query = ask(MESSAGES["queries"]["replace_motherdir"], limited_to: OPTIONS)
@@ -70,6 +86,9 @@ module Switcher
                   empty_directory(service_name)
                   inside(service_name) do
                     init_gemfile
+                    define_app_dir_structure
+                    define_db_dir_structure
+                    add_config_files
                   end
                 end
               end
@@ -165,6 +184,10 @@ module Switcher
 
       def run_test_script_exists?
         File.exists?("#{destination_root}/run_test")
+      end
+
+      def service_exists?
+        File.exists?("#{destination_root}/services/#{service_name}")
       end
     end
   end

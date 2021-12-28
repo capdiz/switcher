@@ -25,17 +25,85 @@ module Switcher
         run('bundle exec cap install')
       end
 
+      def define_app_dir_structure
+        mk_app_dir
+        if app_dir_exists?
+          inside("app") do
+            mk_app_rb_file
+            mk_models_dir
+            mk_controllers_dir
+          end
+        end
+      end
+
+      def define_db_dir_structure
+        mk_db_dir
+      end
+
+      def add_config_files
+        if config_dir_exists?
+          inside("config") do
+            mk_router_rb_file
+            mk_db_file
+          end
+        end
+      end
+    
+      def mk_service_spec(service_name)
+        if spec_dir_exists?
+          inside("spec") do
+            FileUtils.touch("#{service_name}_spec.rb")        
+          end
+        end
+      end
+
       protected
       def mk_app_dir
         FileUtils.mkdir("app")
+      end
+
+      def mk_app_rb_file
+        FileUtils.touch("app.rb")
+      end
+
+      def mk_models_dir
+        FileUtils.mkdir("models")
+      end
+
+      def mk_controllers_dir
+        FileUtils.mkdir("controllers")
       end
 
       def mk_db_dir
         FileUtils.mkdir("db")
       end
 
+      def mk_router_rb_file
+        FileUtils.touch("router.rb")        
+      end
+
+      def mk_db_file
+        FileUtils.touch("db.yml")
+      end
+
       def gemfile_created?
         File.file?(File.expand_path("Gemfile", destination_root))
+      end
+
+      def app_dir_exists?
+        File.exists?(File.expand_path("app", destination_root))
+      end
+
+      def db_dir_exists?
+        File.exists?(File.expand_path("db", destination_root))
+      end
+
+      def config_dir_exists?
+        File.exists?(File.expand_path("config", destination_root)) 
+      end
+
+      def spec_dir_exists?
+        File.exists?(File.expand_path("spec", destination_root))
       end
 
       def default_gems

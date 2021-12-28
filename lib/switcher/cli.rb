@@ -1,5 +1,6 @@
 require 'thor'
 require_relative 'cli/motherdir'
+require_relative 'cli/create'
 
 module Switcher
   module CLI
@@ -16,7 +17,7 @@ module Switcher
      end 
 
       desc "create SUBCOMMAND ...ARGS", "create's a service with a service name"
-      #subcommand "create", CLI::Create
+      subcommand "create", Switcher::CLI::Create
     end
   end
 end
