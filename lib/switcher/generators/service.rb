@@ -16,6 +16,30 @@ module Switcher
         end
       end
 
+      def inside_motherdir?
+        current_dir = Dir.getwd
+        if current_dir != Dir.home
+          path = Pathname.new(current_dir)
+          motherdir = path.children.each do |child|
+            break true if child.directory? && child.basename.to_s == "services"
+          end
+
+          if motherdir.class.to_s == "Boolean"
+            return motherdir
+          else
+            service_dir = path.ascend do |dir|
+              break true if dir.directory? && dir.basename == "services"
+            end
+            if service_dir.class.to_s == "Boolean"
+              return service_dir
+            else
+              return false
+            end
+          end
+        else
+        end
+      end
+
       def service_exists?
         File.exists?("#{service_path}/#{service_name}")
       end
@@ -33,32 +57,7 @@ module Switcher
           end
         end
         service_dir.to_s
-      end
-
-      def inside_motherdir?
-        curr_dir = Dir.getwd
-        if curr_dir != Dir.home
-          path = Pathname.new(curr_dir)
-          inside_motherdir = path.children.each do |child|
-            if child.directory? && child.basename.to_s == "services"
-              break true
-            end
-          end
-
-          if inside_motherdir.class.to_s == "Array"
-            inside_servicedir = path.ascend do |dir|
-              break true if dir.directory? && dir.basename == "services"
-            end          
-            if inside_servicedir.class.to_s == "Boolean" 
-              return inside_servicedir
-            else
-              return false
-            end
-          else
-            return inside_motherdir
-          end
-        end
-      end        
+      end       
     end
   end
 end
