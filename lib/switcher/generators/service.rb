@@ -43,22 +43,22 @@ module Switcher
             if child.directory? && child.basename.to_s == "services"
               break true
             end
-          end                    
-          
-          if inside_motherdir.class.to_s == "Array"
-            inside_motherdir = path.ascend do |dir|
-              break true if dir.directory? && dir.basename.to_s == "services"
-            end
           end
 
-          if inside_motherdir.class.to_s == "Boolean"
-            return inside_motherdir
+          if inside_motherdir.class.to_s == "Array"
+            inside_servicedir = path.ascend do |dir|
+              break true if dir.directory? && dir.basename == "services"
+            end          
+            if inside_servicedir.class.to_s == "Boolean" 
+              return inside_servicedir
+            else
+              return false
+            end
           else
-            return false
+            return inside_motherdir
           end
-        else
         end
-      end
+      end        
     end
   end
 end
