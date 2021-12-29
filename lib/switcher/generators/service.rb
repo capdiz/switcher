@@ -58,7 +58,7 @@ module Switcher
             break dir if dir.directory? && dir.basename.to_s == "services"
           end
 
-          return service_dir if service_dir.class.to_s == "String"
+          return service_dir.to_s if service_dir.class.to_s == "Pathname"
         end
       end       
     end
