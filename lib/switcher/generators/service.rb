@@ -18,7 +18,7 @@ module Switcher
               unless files.size < 1
                 say(MESSAGES["output_msgs"]["files_to_remove"], :green)
                 dirs = files.map { |file_name| }.join(", ")
-                puts dirs
+                puts files
                 say(dirs, :blue)
                 response = ask(MESSAGES["queries"]["delete_services"], limited_to: OPTIONS)
                 unless response == "n"
