@@ -51,9 +51,8 @@ module Switcher
           break child if child.directory? && child.basename.to_s == "services"
         end
 
-        puts service_dir.class.to_s
-        if service_dir.class.to_s == "String"
-          return service_dir
+        if service_dir.class.to_s == "Pathname"
+          return service_dir.to_s
         else
           service_dir = path.ascend do |dir|
             break dir if dir.directory? && dir.basename.to_s == "services"
