@@ -28,7 +28,7 @@ module Switcher
           base_dir_name = path.to_s
           files = Dir.entries("#{base_dir_name}").reject { |file| file == ".." || file == "." }
           if files.size > 0
-            say(MESSAGE["output_msgs"]["files_to_remove"], :green)
+            say(MESSAGES["output_msgs"]["files_to_remove"], :green)
             dirs = files.map { |file_name| file_name }.join(", ")
             say(dirs, :blue)
             query = ask(MESSAGES["queries"]["delete_services"], limited_to: OPTIONS)
