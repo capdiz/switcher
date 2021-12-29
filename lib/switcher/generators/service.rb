@@ -49,11 +49,22 @@ module Switcher
       end
 
       def generate_service
-        inside(service_name) do
-          init_gemfile
-          define_app_dir_structure
-          define_db_dir_structure
-          add_config_files
+        inside("services") do
+          if service_exists?
+            inside(service_name) do
+              init_gemfile
+              define_app_dir_structure
+              define_db_dir_structure
+              add_config_files
+            end
+          else
+            empty_directory(service_name)
+            inside(service_name) do
+              init_gemfile
+              define_app_dir_structure
+              define_db_dir_structure
+              add_config_files
+            end
         end
       end
       
