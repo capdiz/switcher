@@ -51,6 +51,8 @@ module Switcher
           break child if child.directory? && child.basename.to_s == "services"
         end
 
+        puts service_dir
+
         if service_dir.empty?
           puts service_dir
           service_dir = path.ascend do |dir|
