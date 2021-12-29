@@ -48,7 +48,7 @@ module Switcher
               files = Dir.entries("#{base_dir_name}").reject { |file| file == ".." || file == "." }
               unless files.size < 1
                 say(MESSAGES["output_msgs"]["services_dir_exists_msg"], :green)
-                dirs = files.map { |file_name| }.join(", ")
+                dirs = files.map { |file_name| file_name }.join(", ")
                 say(dirs, :blue)
                 response = ask(MESSAGES["queries"]["delete_services"], limited_to: OPTIONS)
                 unless response == "n"
