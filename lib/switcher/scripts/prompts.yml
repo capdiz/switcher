@@ -20,3 +20,4 @@ queries:
   delete_services: "The available APIs will be deleted. Would you like to proceed?"
   setup_db: "Would you like to setup a postgres database?"
   replace_service_query: "Would you like to replace it?"
+  replace_service: "Would you like to replace this service?"
