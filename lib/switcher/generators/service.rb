@@ -30,8 +30,7 @@ module Switcher
             service_dir = path.ascend do |dir|
               break true if dir.directory? && dir.basename.to_s == "services"
             end
-            if service_dir.class.to_s == "TrueClass"
-              puts service_dir
+            if service_dir.class.to_s == "TrueClass"            
               return service_dir
             else
               return false
@@ -53,6 +52,7 @@ module Switcher
         end
 
         if service_dir.empty?
+          puts service_dir
           service_dir = path.ascend do |dir|
             break dir if dir.directory? && dir.basename.to_s == "services"
           end
