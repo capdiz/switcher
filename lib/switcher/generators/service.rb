@@ -1,6 +1,7 @@
 require 'find'
 require 'pathname'
 require 'fileutils'
+require 'structure'
 module Switcher
   module Generators
     module Service
@@ -28,6 +29,10 @@ module Switcher
                     unless File.exists? "#{base_dir_name}/#{dir}"
                       say("Successfully removed #{dir}...", :green)
                     end
+                  end
+
+                  inside(service_name) do
+                    define_app_dir_structure
                   end
                 end
               end
