@@ -21,7 +21,7 @@ module Switcher
                 say(dirs, :blue)
                 response = ask(MESSAGES["queries"]["delete_services"], limited_to: OPTIONS)
                 unless response == "n"
-                  say("Deleting file#{'s' if files.size > 1}...". :red)
+                  say("Deleting file#{'s' if dirs.size > 1}...", :red)
                   files.each do |dir|
                     FileUtils.remove_dir "#{base_dir_name}/#{dir}"
                     unless File.exists? "#{base_dir_name}/#{dir}"
