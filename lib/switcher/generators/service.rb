@@ -12,7 +12,7 @@ module Switcher
             say("A service named #{service_name} already exists.", :green)
             query = ask(MESSAGES["queries"]["replace_service"], limited_to: OPTIONS)
             unless query == "n"
-              path = Pathname.new(service_path)
+              path = Pathname.new("#{service_path}/service_name")
               base_dir_name = path.basename.to_s
               puts base_dir_name
             end
