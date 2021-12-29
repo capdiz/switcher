@@ -22,3 +22,4 @@ queries:
   setup_db: "Would you like to setup a postgres database?"
   replace_service_query: "Would you like to replace it?"
   replace_service: "Would you like to replace this service?"
+  delete_services: "Would you like to remove these files?"

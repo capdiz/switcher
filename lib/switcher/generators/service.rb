@@ -13,12 +13,22 @@ module Switcher
             query = ask(MESSAGES["queries"]["replace_service"], limited_to: OPTIONS)
             unless query == "n"
               path = Pathname.new("#{service_path}/#{service_name}")
-              base_dir_name = path.basename.to_s
+              base_dir_name = path.to_s
               files = Dir.entries("#{base_dir_name}").reject { |file| file == ".." || file == "." }
               unless files.size < 1
                 say(MESSAGES["output_messages"]["files_to_remove"], :green)
                 dirs = files.map { |file_name| file_name.join(", ") }
                 say(dirs, :blue)
+                response = ask(MESSAGES["queries"]["delete_services"], limited_to: OPTIONS)
+                unless response == "n"
+                  say("Deleting file#{'s' if files.size > 1}...". :red)
+                  files.each do |dir|
+                    FileUtils.remove_dir "#{base_dir_name}/#{dir}"
+                    unless File.exists? "#{base_dir_name}/#{dir}"
+                      say("Successfully removed #{dir}...", :green)
+                    end
+                  end
+                end
               end
             end
           end
