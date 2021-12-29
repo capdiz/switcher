@@ -26,14 +26,13 @@ module Switcher
 
           puts motherdir.class
 
-          if motherdir.class.to_s == "Boolean"
-            puts motherdir
+          if motherdir.class.to_s == "TrueClass"
             return motherdir
           else
             service_dir = path.ascend do |dir|
               break true if dir.directory? && dir.basename.to_s == "services"
             end
-            if service_dir.class.to_s == "Boolean"
+            if service_dir.class.to_s == "TrueClass"
               return service_dir
             else
               return false
