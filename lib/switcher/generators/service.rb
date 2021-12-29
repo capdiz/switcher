@@ -12,9 +12,14 @@ module Switcher
             say("A service named #{service_name} already exists.", :green)
             query = ask(MESSAGES["queries"]["replace_service"], limited_to: OPTIONS)
             unless query == "n"
-              path = Pathname.new("#{service_path}/service_name")
+              path = Pathname.new("#{service_path}/#{service_name}")
               base_dir_name = path.basename.to_s
-              puts base_dir_name
+              files = Dir.entries("#{base_dir_name}").reject { |file| file == ".." || file == "." }
+              unless files.size < 1
+                say(MESSAGES["output_messages"]["files_to_remove"], :green)
+                dirs = files.map { |file_name| file_name.join(", ") }
+                say(dirs, :blue)
+              end
             end
           end
         else

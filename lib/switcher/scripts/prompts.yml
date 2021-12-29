@@ -13,6 +13,7 @@ output_msgs:
   deleted_load_script: "Successfully deleted load script..."
   deleted_deploy_script: "Successfully deleted deploy script..."
   deleted_run_test_script: "Successfully deleted run_test script..."
+  files_to_remove: "The following files will be deleted:"
 queries:
   replace_motherdir: "Would you like to replace it?"
   create_service: "Would you like to setup an API now?"
