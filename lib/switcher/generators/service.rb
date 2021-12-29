@@ -27,7 +27,7 @@ module Switcher
           path = Pathname.new("#{service_path}/#{service_name}")
           base_dir_name = path.to_s
           files = Dir.entries("#{base_dir_name}").reject { |file| file == ".." || file == "." }
-          if file.size > 0
+          if files.size > 0
             say(MESSAGE["output_msgs"]["files_to_remove"], :green)
             dirs = files.map { |file_name| file_name }.join(", ")
             say(dirs, :blue)
