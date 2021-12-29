@@ -24,8 +24,6 @@ module Switcher
             break true if child.directory? && child.basename.to_s == "services"
           end
 
-          puts motherdir.class
-
           if motherdir.class.to_s == "TrueClass"
             return motherdir
           else
@@ -33,6 +31,7 @@ module Switcher
               break true if dir.directory? && dir.basename.to_s == "services"
             end
             if service_dir.class.to_s == "TrueClass"
+              puts service_dir
               return service_dir
             else
               return false
