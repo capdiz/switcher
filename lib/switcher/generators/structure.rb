@@ -1,5 +1,5 @@
 module Switcher
-  module CLI
+  module Generators
     module Structure
       def init_gemfile
         run('bundle init')
