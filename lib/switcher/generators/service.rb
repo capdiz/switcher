@@ -65,6 +65,7 @@ module Switcher
               define_db_dir_structure
               add_config_files
             end
+          end
         end
       end
       
