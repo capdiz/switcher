@@ -1,7 +1,7 @@
 require 'find'
 require 'pathname'
 require 'fileutils'
-require 'structure'
+require_relative 'structure'
 module Switcher
   module Generators
     module Service
