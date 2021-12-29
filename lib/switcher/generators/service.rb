@@ -1,5 +1,6 @@
 require 'find'
 require 'pathname'
+require 'fileutils'
 module Switcher
   module Generators
     module Service
