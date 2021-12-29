@@ -13,9 +13,9 @@ module Switcher
             query = ask(MESSAGES["queries"]["replace_service"], limited_to: OPTIONS)
             unless query == "n"
               path = Pathname.new("#{service_path}/#{service_name}")
-              base_dir_name = path.to_s
-              puts base_dir_name
+              base_dir_name = path.to_s              
               files = Dir.entries("#{base_dir_name}").reject { |file| file == ".." || file == "." }
+              puts files
               unless files.size < 1
                 say(MESSAGES["output_msgs"]["files_to_remove"], :green)
                 dirs = files.map { |file_name| }.join(", ")
