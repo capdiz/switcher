@@ -51,6 +51,7 @@ module Switcher
       end
 
       def regenerate_service(path)
+        p path
         dir = path
         inside(dir) do
           if service_exists?
