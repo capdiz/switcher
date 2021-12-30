@@ -54,12 +54,10 @@ module Switcher
         dir = path
         inside(dir) do
           if service_exists?
-            inside(service_name) do
-              init_gemfile
-              define_app_dir_structure
-              define_db_dir_structure
-              add_config_files
-            end
+            init_gemfile
+            define_app_dir_structure
+            define_db_dir_structure
+            add_config_files            
           end
         end
       end
