@@ -42,6 +42,7 @@ module Switcher
                   say("Successfully removed #{dir}...", :green)
                 end
               end
+              p path.to_s
               generate_service
             end
           else
