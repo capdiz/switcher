@@ -16,6 +16,8 @@ module Switcher
             say("A service named #{service_name} already exists.", :green)
             query = ask(MESSAGES["queries"]["replace_service"], limited_to: OPTIONS)
             replace_service(query)
+          else
+            generate_service
           end
         else
           say("Nothin found!", :green)
