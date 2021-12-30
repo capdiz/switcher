@@ -41,12 +41,25 @@ module Switcher
                 unless File.exists? "#{base_dir_name}/#{dir}"
                   say("Successfully removed #{dir}...", :green)
                 end
-              end
-              p path.to_s
-              generate_service
+              end              
+              regenerate_service(path)
             end
           else
-            generate_service
+            regenerate_service(path)
+          end
+        end
+      end
+
+      def regenerate_service(path)
+        dir = path
+        inside(dir) do
+          if service_exists?
+            inside(service_name) do
+              init_gemfile
+              define_app_dir_structure
+              define_db_dir_structure
+              add_config_files
+            end
           end
         end
       end
@@ -54,25 +67,14 @@ module Switcher
       def generate_service
         dir = service_path
         inside(dir) do
-          if service_exists?
-            inside(service_name) do 
-              init_gemfile
-              define_app_dir_structure
-              define_db_dir_structure
-              add_config_files
-            end
-          else
-            inside(dir) do
-              empty_directory(service_name)
-              inside(service_name) do
-                init_gemfile
-                define_app_dir_structure
-                define_db_dir_structure
-                add_config_files
-              end
-            end
+          empty_directory(service_name)
+          inside(service_name) do
+            init_gemfile
+            define_app_dir_structure
+            define_db_dir_structure
+            add_config_files
           end
-        end
+        end                
       end
       
       def service_path
