@@ -50,9 +50,8 @@ module Switcher
         end
       end
 
-      def regenerate_service(path)
-        p path
-        dir = path
+      def regenerate_service(path)        
+        dir = Dir.chdir(path.to_s)
         inside(dir) do
           if service_exists?
             init_gemfile
