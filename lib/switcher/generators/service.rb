@@ -68,6 +68,7 @@ module Switcher
                 add_config_files
               end
             end
+          end
         end
       end
       
