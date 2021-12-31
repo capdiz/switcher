@@ -72,7 +72,7 @@ module Switcher
         empty_directory(motherdir_name)
         inside(motherdir_name) do
           say("Creating services directory. This is where your APIs live...", :green)
-          create_load_script
+       #   create_load_script
           create_deploy_script
           create_run_test_script
           say(MESSAGES["output_msgs"]["creating_service_dir_msg"], :green)
@@ -80,6 +80,7 @@ module Switcher
           query = ask(MESSAGES["queries"]["create_service"], limited_to: OPTIONS)
           unless query == "n"
             if services_dir_exists?
+              create_load_script
               service_name = ask(MESSAGES["queries"]["service_name"])
               unless service_name.strip.empty?
                 inside("services") do
@@ -135,16 +136,22 @@ module Switcher
           create_run_test_script
         end
       end
-
+      
       def create_load_script
-        say(MESSAGES["output_msgs"]["load_script_msg"], :green)
-        create_file "load", "#!/usr/bin/env bash\n"
-        if load_script_exists?
-          file = "#{destination_root}/load"
-          load_script = CLI::Script.new
-          load_script.make_executable(file)
-        end
+        inside("services") do
+          empty_directory(".config")
+          if config_dir_exists?
+            inside(".config") do
+              say(MESSAGES["output_msgs"]["load_script_msg"], :green)
+              create_file "load", "#!usr/bin/env bash\n"
+              file = "#{destination_root}/services/.config/load"
+              load_script = CLI::Script.new
+              load_script.make_executable(file)
+            end
+          end
+        end 
       end
+
 
       def create_deploy_script
         say(MESSAGES["output_msgs"]["deploy_script_msg"], :green)
@@ -173,6 +180,11 @@ module Switcher
       def services_dir_exists?
         File.exists?("#{destination_root}/services")
       end
+      
+      def config_dir_exists?
+        File.exists?("#{destination_root}/services/.config")
+      end
+
 
       def load_script_exists?
         File.exists?("#{destination_root}/load")
