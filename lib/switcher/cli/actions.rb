@@ -140,7 +140,7 @@ module Switcher
       def create_load_script
         inside("services") do
           empty_directory(".config")
-          if config_dir_exists?
+         # if config_dir_exists?
             inside(".config") do
               say(MESSAGES["output_msgs"]["load_script_msg"], :green)
               create_file "load", "#!usr/bin/env bash\n"
@@ -148,7 +148,7 @@ module Switcher
               load_script = CLI::Script.new
               load_script.make_executable(file)
             end
-          end
+          #end
         end 
       end
 
