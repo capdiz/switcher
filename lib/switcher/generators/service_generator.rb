@@ -7,7 +7,7 @@ module Switcher
       argument :service_name, type: :string
 
       def create_switcher_service
-        create_service
+        switch_dir
       end
     end
   end
