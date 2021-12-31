@@ -20,7 +20,7 @@ module Switcher
             generate_service
           end
         else
-          say("Nothin found!", :green)
+          say("The 'switcher create service command' can only be run within a switcher application's single-mother directory.", :green)
         end
       end
 
