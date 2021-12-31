@@ -121,13 +121,18 @@ module Switcher
       end
 
       def create_load_script
-        say(MESSAGES["output_msgs"]["load_script_msg"], :green)
-        create_file "load", "#!/usr/bin/env bash\n"
-        if load_script_exists?
-          file = "#{destination_root}/load"
-          load_script = CLI::Script.new
-          load_script.make_executable(file)
-        end
+        inside("services") do
+          empty_directory(".config")
+          if config_dir_exists?
+            inside(".config") do
+              say(MESSAGES["output_msgs"]["load_script_msg"], :green)
+              create_file "load", "#!usr/bin/env bash\n"
+              file = "#{destination_root}/services/.config/load"
+              load_script = CLI::Script.new
+              load_script.make_executable(file)
+            end
+          end
+        end 
       end
 
       def create_deploy_script
@@ -158,8 +163,12 @@ module Switcher
         File.exists?("#{destination_root}/services")
       end
 
+      def config_dir_exists?
+        File.exists?("#{destination_root}/services/.config")
+      end
+
       def load_script_exists?
-        File.exists?("#{destination_root}/load")
+        File.exists?("#{destination_root}/services/.config/load")
       end
 
       def deploy_script_exists?

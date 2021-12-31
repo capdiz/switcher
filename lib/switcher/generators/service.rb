@@ -25,10 +25,6 @@ module Switcher
         end
       end
 
-      def switch_dir
-        run('cd home/test')
-      end
-
       def replace_service(response)
         unless response == "n"
           path = Pathname.new("#{service_path}/#{service_name}")
