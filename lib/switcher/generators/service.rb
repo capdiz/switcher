@@ -21,6 +21,7 @@ module Switcher
           end
         else
           say("The 'switcher create service command' can only be run within a switcher application's single-mother directory.", :green)
+          say("Run 'switcher motherdir app_name' to create a new switcher application.", :white)
         end
       end
 
