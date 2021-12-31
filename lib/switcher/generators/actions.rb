@@ -56,7 +56,7 @@ module Switcher
         empty_directory(motherdir_name)
         inside(motherdir_name) do
           say("Creating services directory. This is where your APIs live...", :green)
-          create_load_script
+          #create_load_script
           create_deploy_script
           create_run_test_script
           say(MESSAGES["output_msgs"]["creating_service_dir_msg"], :green)
@@ -64,6 +64,7 @@ module Switcher
           query = ask(MESSAGES["queries"]["create_service"], limited_to: OPTIONS)
           unless query == "n"
             if services_dir_exists?
+              create_load_script
               service_name = ask(MESSAGES["queries"]["service_name"])
               unless service_name.strip.empty?
                 inside("services") do
