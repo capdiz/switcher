@@ -26,7 +26,7 @@ module Switcher
       end
 
       def switch_dir
-        run_command('cd home/test')
+        run('cd home/test')
       end
 
       def replace_service(response)
