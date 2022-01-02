@@ -145,7 +145,13 @@ module Switcher
             break File.absolute_path(dir) if File.basename(dir) == ".config"
           end
           if config_dir_exists?(config_folder)
-            puts "Hello world"
+            inside(config_folder) do
+              say(MESSAGES["output_msgs"]["load_script_msg"], :green)
+              create_file "load", "#!usr/bin/env bash\n"
+              file = "#{config_folder}/.load"
+              load_script = CLI::Script.new
+              load_script.make_executable(file)
+            end
           end
         end
       end
