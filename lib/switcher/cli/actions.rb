@@ -144,7 +144,7 @@ module Switcher
           config_folder = Dir.entries("#{path.to_s}").each do |dir|   
             break File.absolute_path(dir) if File.basename(dir) == ".config"
           end
-          if config_dir_exists?
+          if config_dir_exists?(config_folder)
             puts "Hello world"
           end
         end
@@ -179,8 +179,8 @@ module Switcher
         File.exists?("#{destination_root}/services")
       end
       
-      def config_dir_exists?
-        File.exists?("#{destination_root}/services/.config")
+      def config_dir_exists?(path)
+        File.exists?("#{path}")
       end
 
 
