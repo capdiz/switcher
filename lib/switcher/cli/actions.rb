@@ -48,9 +48,10 @@ module Switcher
                 end
               end              
               inside("services") do
-                overwrite_load_script
-                overwrite_deploy_script
-                overwrite_run_test_script
+                FileUtils.mkdir(".config")
+                create_load_script
+                create_deploy_script
+                create_run_test_script
               end
             end
           end
