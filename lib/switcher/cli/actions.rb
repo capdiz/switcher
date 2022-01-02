@@ -142,9 +142,11 @@ module Switcher
           FileUtils.mkdir(".config") 
           path = Pathname.new("#{destination_root}")
           config_folder = Dir.entries("#{path.to_s}").each do |dir|
+            puts "hello #{dir}"
             break dir if File.basename(dir) == ".config"
           end
-          puts config_folder
+
+
         end
       end
 
