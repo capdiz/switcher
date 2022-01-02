@@ -73,8 +73,8 @@ module Switcher
         inside(motherdir_name) do
           say("Creating services directory. This is where your APIs live...", :green)
        #   create_load_script
-          create_deploy_script
-          create_run_test_script
+          #create_deploy_script
+          #create_run_test_script
           say(MESSAGES["output_msgs"]["creating_service_dir_msg"], :green)
           empty_directory("services")
           query = ask(MESSAGES["queries"]["create_service"], limited_to: OPTIONS)
@@ -139,17 +139,8 @@ module Switcher
       
       def create_load_script
         inside("services") do
-          empty_directory(".config")
-         # if config_dir_exists?
-            inside(".config") do
-              say(MESSAGES["output_msgs"]["load_script_msg"], :green)
-              create_file "load", "#!usr/bin/env bash\n"
-              file = "#{destination_root}/services/.config/load"
-              load_script = CLI::Script.new
-              load_script.make_executable(file)
-            end
-          #end
-        end 
+          FileUtils.mkdir(".config") 
+        end
       end
 
 
