@@ -1,3 +1,4 @@
+require_relative 'service'
 module Switcher
   module CLI
     class Create < Thor
