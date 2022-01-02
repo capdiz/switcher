@@ -148,7 +148,7 @@ module Switcher
             inside(config_folder) do
               say(MESSAGES["output_msgs"]["load_script_msg"], :green)
               create_file "load", "#!usr/bin/env bash\n"
-              file = "#{config_folder}/.load"
+              file = "#{config_folder}/load"
               load_script = CLI::Script.new
               load_script.make_executable(file)
             end
