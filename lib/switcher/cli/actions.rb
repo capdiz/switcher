@@ -37,11 +37,7 @@ module Switcher
         say(MESSAGES["output_msgs"]["motherdir_exists_msg"], :green)
         query = ask(MESSAGES["queries"]["replace_motherdir"], limited_to: OPTIONS)
         unless query == "n"
-          inside(motherdir_name) do
-            overwrite_load_script
-            overwrite_deploy_script
-            overwrite_run_test_script
-
+          inside(motherdir_name) do          
             if services_dir_exists?
               path = Pathname.new("#{destination_root}/services")
               base_dir_name = path.to_s
@@ -61,6 +57,9 @@ module Switcher
                   end
                 end
               end              
+              overwrite_load_script
+              overwrite_deploy_script
+              overwrite_run_test_script
             end
           end
         end
