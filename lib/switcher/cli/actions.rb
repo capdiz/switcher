@@ -140,7 +140,7 @@ module Switcher
       def create_load_script
         inside("services") do
           FileUtils.mkdir(".config") 
-          path = Pathname.new("#{destination_root}/services")
+          path = Pathname.new("#{destination_root}")
           config_folder = Dir.entries("#{path.to_s}").each do |dir|
             break dir if File.basename(dir) == ".config"
           end
