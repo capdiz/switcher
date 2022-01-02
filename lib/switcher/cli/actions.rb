@@ -141,12 +141,12 @@ module Switcher
         inside("services") do
           FileUtils.mkdir(".config") 
           path = Pathname.new("#{destination_root}")
-          config_folder = Dir.entries("#{path.to_s}").each do |dir|
-            puts "hello #{File.absolute_path(dir)}"
-            break dir if File.basename(dir) == ".config"
+          config_folder = Dir.entries("#{path.to_s}").each do |dir|   
+            break File.absolute_path(dir) if File.basename(dir) == ".config"
           end
-
-
+          if config_dir_exists?
+            puts "Hello world"
+          end
         end
       end
 
