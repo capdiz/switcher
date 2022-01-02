@@ -197,7 +197,7 @@ module Switcher
         File.exists?("#{destination_root}/services")
       end
 
-      def hidden_config_dir_exits?(path)
+      def hidden_config_dir_exists?(path)
         File.exists?("#{path}")
       end
 
