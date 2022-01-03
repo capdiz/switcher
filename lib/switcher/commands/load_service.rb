@@ -13,7 +13,7 @@ module Switcher
       end
 
       def config_path
-        config_dir = Dir.entries("#{service_path}").each do |dir|
+        config_dir = Dir.entries("#{service_dir_path}").each do |dir|
           break File.absolute_path(dir) if File.basename(dir) == ".config"            
         end      
       end
