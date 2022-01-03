@@ -1,6 +1,7 @@
 require 'thor'
 require_relative 'cli/motherdir'
 require_relative 'cli/create'
+require_relative 'command/load
 
 module Switcher
   module CLI
@@ -11,13 +12,12 @@ module Switcher
         Motherdir.start([app_name])              
       end
 
-      desc "load SERVICE_NAME", "loads service directory as currently working directory"
-     def load(service_name)
-       
-     end 
-
       desc "create SUBCOMMAND ...ARGS", "create's a service with a service name"
       subcommand "create", Switcher::CLI::Create
+
+      desc "load SUBCOMMAND ...ARGS", "load's a service into path"
+      subcommand "load", Switcher::Command::Load
+
     end
   end
 end
