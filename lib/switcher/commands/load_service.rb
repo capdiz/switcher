@@ -13,7 +13,9 @@ module Switcher
       end
 
       def config_path
-        config_dir = Dir.entries("#{service_dir_path}").each do |dir|
+        path = Pathname.new(service_dir_path)
+        puts path.to_s
+        config_dir = Dir.entries("#{path.to_s}").each do |dir|
           break File.absolute_path(dir) if File.basename(dir) == ".config"            
         end      
       end
