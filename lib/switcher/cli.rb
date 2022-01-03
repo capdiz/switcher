@@ -15,7 +15,7 @@ module Switcher
       desc "create SUBCOMMAND ...ARGS", "create's a service with a service name"
       subcommand "create", Switcher::CLI::Create
 
-      desc "load SUBCOMMAND ...ARGS", "load's a service into path"
+      desc "load ...ARGS", "load's a service into path"
       subcommand "load", Switcher::Commands::Load
 
     end
