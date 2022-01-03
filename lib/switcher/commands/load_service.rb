@@ -8,8 +8,7 @@ module Switcher
             Dir.chdir("#{service_path}/.config")
             dir = Dir.getwd
             inside(dir) do
-              run("source ./load")
-              puts Dir.getwd
+              run("ls -all")              
             end
           else
             say("Can't load service #{service_name}. Looks like it isn't an available service", :green)
