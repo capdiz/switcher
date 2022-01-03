@@ -5,11 +5,9 @@ module Switcher
       def run_load_command
         if inside_motherdir?
           if service_exists?
-            Dir.chdir("#{service_path}/.config")
-            dir = Dir.getwd
-            inside(dir) do
-              run("ls -all")              
-            end
+            Dir.chdir("#{service_path}/#{service_name}")
+            say("Loaded #{Dir.getwd} as your current path..", :green)
+            say("You can now deploy #{service_name} using 'switcher deploy #{service_name}", :white)
           else
             say("Can't load service #{service_name}. Looks like it isn't an available service", :green)
           end
