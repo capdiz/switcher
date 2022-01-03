@@ -4,7 +4,7 @@ module Switcher
     module LoadService
       def run_load_command
         if service_path_exists?          
-          inside("#{service_path}") do
+          inside("#{service_dir_path}") do
             run("source ./load")
           end
         else
