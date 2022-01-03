@@ -16,6 +16,7 @@ module Switcher
         open(load_script_path, 'a') do |command|
           command.puts 'echo "Loading merchants..."'
           command.puts 'echo "Switching to /home/capdiz/users/services/merchants..."'
+          command.puts 'echo "home/capdiz/users/services/hello"'
         end
       end
 
