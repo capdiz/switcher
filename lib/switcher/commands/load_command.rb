@@ -6,7 +6,7 @@ module Switcher
       include Commands::LoadService
       argument :service_name, type: :string
 
-      def load_service
+      def create_load_command
         run_load_command
       end
     end

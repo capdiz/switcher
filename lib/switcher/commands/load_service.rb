@@ -3,7 +3,7 @@ module Switcher
   module Commands
     module LoadService
       def run_load_command
-        puts "hello wrold"
+        puts "hello world"
         inside(config_path) do
           run("source ./load")
         end
