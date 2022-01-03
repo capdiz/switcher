@@ -16,12 +16,6 @@ module Switcher
         end
       end  
 
-      def create_service
-        if service_exists?(service_name)
-        else
-        end
-      end
-
       protected      
       def overwrite_motherdir
         say(MESSAGES["output_msgs"]["motherdir_exists_msg"], :green)
@@ -101,6 +95,7 @@ module Switcher
             file = "#{config_path}/load"
             load_script = CLI::Script.new
             load_script.make_executable(file)
+            load_script.add_load_command(file)
           end
         end
       end

@@ -12,6 +12,18 @@ module Switcher
         end
       end
 
+      def add_load_command(load_script_path)
+        open(load_script_path, 'a') do |command|
+          command.puts 'echo \"hello world\"'
+        end
+      end
+
+      def add_deploy_command(deploy_script_path)
+      end
+
+      def add_run_test_command(run_test_script_path)
+      end
+
       protected
       def is_executable?(file)
         File.executable?(file)
