@@ -22,7 +22,8 @@ module Switcher
 
       desc "deploy SERVICE_NAME", "deploy's a service current path to production"
       def deploy(service_name)
-        Commands::DeployCommand.start([service_name])
+        #Commands::DeployCommand.start([service_name])
+      end
     end
   end
 end
