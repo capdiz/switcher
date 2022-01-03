@@ -3,7 +3,7 @@ module Switcher
   module Commands
     module LoadService
       def run_load_command
-        if inside_motherdir
+        if inside_motherdir?
           if service_exists?
             puts "Hello world!!"
           else
