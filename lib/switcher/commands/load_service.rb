@@ -5,7 +5,8 @@ module Switcher
       def run_load_command
         if inside_motherdir?
           if service_exists?
-            puts "Hello world!!"
+            dir = Dir.chdir("#{service_path}/#{service_name}")
+            puts Dir.getwd
           else
             say("Can't load service #{service_name}. Looks like it isn't an available service", :green)
           end
