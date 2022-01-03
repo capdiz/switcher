@@ -15,9 +15,10 @@ module Switcher
       desc "create SUBCOMMAND ...ARGS", "create's a service with a service name"
       subcommand "create", Switcher::CLI::Create
 
-      desc "load ...ARGS", "load's a service into path"
-      subcommand "load", Switcher::Commands::Load
-
+      desc "load SERVICE_NAME", "load's a service into path"
+      def load(service_name)
+        Commands::LoadCommand.start([service_name])
+      end
     end
   end
 end
