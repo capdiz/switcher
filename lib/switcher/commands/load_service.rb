@@ -37,7 +37,7 @@ module Switcher
       end
 
       def service_path_exists?
-        File.exists?("#{service_path}")
+        File.exists?("#{service_dir_path}")
       end
     end
   end
