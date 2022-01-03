@@ -7,8 +7,7 @@ module Switcher
       argument :service_name, type: :string
 
       def create_load_command
-        puts service_nme
-        run_load_commad
+        run_load_command
       end
     end
   end
