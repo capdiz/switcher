@@ -3,18 +3,19 @@ module Switcher
   module Commands
     module LoadService
       def run_load_command
-        puts "hello world"
-        inside(config_path) do
-          run("source ./load")
+        if service_path_exists?
+          inside(config_path) do
+            run("source ./load")
+          end
+        else
+          say("Nothing found!", :green)
         end
       end
 
       def config_path
-        if service_path_exists?
-          config_dir = Dir.entries("#{service_path}").each do |dir|
-            break File.absolute_path(dir) if File.basename(dir) == ".config"            
-          end
-        end
+        config_dir = Dir.entries("#{service_path}").each do |dir|
+          break File.absolute_path(dir) if File.basename(dir) == ".config"            
+        end      
       end
 
       def service_dir_path
