@@ -3,9 +3,8 @@ module Switcher
   module Commands
     module LoadService
       def run_load_command
-        if service_path_exists?
-          path = Pathname.new(config_path)
-          inside("#{path.to_s}") do
+        if service_path_exists?          
+          inside("#{service_path}") do
             run("source ./load")
           end
         else
