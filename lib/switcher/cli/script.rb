@@ -14,7 +14,7 @@ module Switcher
 
       def add_load_command(load_script_path)
         open(load_script_path, 'a') do |command|
-          command.puts 'echo \"hello world\"'
+          command.puts 'echo "Hello world! Welcome to the load family"'
         end
       end
 

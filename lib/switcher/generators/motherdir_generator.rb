@@ -91,7 +91,7 @@ module Switcher
         if hidden_config_dir_exists?(config_path)
           inside(config_path) do
             say(MESSAGES["output_msgs"]["load_script_msg"], :green)
-            create_file "load", "#!usr/bin/env bash\n"
+            create_file "load", "#!/usr/bin/env bash\n"
             file = "#{config_path}/load"
             load_script = CLI::Script.new
             load_script.make_executable(file)
