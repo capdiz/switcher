@@ -116,6 +116,7 @@ module Switcher
             end
           end
         else
+          return false
         end
       end
 

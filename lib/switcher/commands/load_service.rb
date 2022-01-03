@@ -3,46 +3,61 @@ module Switcher
   module Commands
     module LoadService
       def run_load_command
-        if service_path_exists?          
-          puts service_dir_path
-          inside("#{service_dir_path}") do
-            run("source ./load")            
+        if inside_motherdir
+          if service_exists?
+            puts "Hello world!!"
+          else
+            say("Can't load service #{service_name}. Looks like it isn't an available service", :green)
           end
-          puts Dir.getwd
         else
-          say("Nothing found!", :green)
+          say("The 'switcher load service_name' command can only be called from inside a swutcher single-mother directory application.", :green)
+          say("Run 'switcher motherdir APP_NAME' to create one", :white)
         end
       end
 
-      def config_path
-        path = Pathname.new(service_dir_path)
-        puts path.to_s
-        config_dir = Dir.entries("#{path.to_s}").each do |dir|
-          break File.absolute_path(dir) if File.basename(dir) == ".config"            
-        end      
+      def service_path
+        curr_dir = Dir.getwd
+        path = Pathname.new(curr_dir)
+        service_dir = path.children.each do |child|
+          break child if child.directory? && child.basename.to_s == "services"
+        end
+
+        if service_dir.class.to_s == "Pathname"
+          return service_dir.to_s
+        else
+          service_dir = path.ascend do |dir|
+            break dir if dir.directory? && dir.basename.to_s == "services"
+          end
+          return service_dir.to_s if service_dir.class.to_s == "Pathname"
+        end
       end
 
-      def service_dir_path
+      def inside_motherdir?
         curr_dir = Dir.getwd
         if curr_dir != Dir.home
           path = Pathname.new(curr_dir)
-          services_dir = path.children.each do |child|
-            break child if path.directory? && path.basename.to_s == "services"
+          motherdir = path.children.each do |child|
+            break true if child.directory? && child.basename.to_s == "services"
           end
-
-          if services_dir.class.to_s == "Pathname"
-            return services_dir.to_s
+          if motherdir.class.to_s == "TrueClass"
+            return motherdir
           else
-            services_dir = path.ascend do |dir|
-              break dir if dir.directory? && dir.basename.to_s == "services"
+            service_dir = path.ascend do |dir|
+              break true if dir.directory? && dir.basename.to_s == "services"
             end
-            return services_dir.to_s if services_dir.class.to_s == "Pathname"
-          end
+            if service_dir.class.to_s == "TrueClass"
+              return service_dir
+            else
+              return false
+            end
+          end  
+        else
+          return false
         end
       end
 
-      def service_path_exists?
-        File.exists?("#{service_dir_path}")
+      def service_exists?
+        File.exists?("#{service_path}/#{service_name}")
       end
     end
   end
