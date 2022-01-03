@@ -4,9 +4,9 @@ module Switcher
     module LoadService
       def run_load_command
         if service_path_exists?          
-          working_dir = Dir.chdir(service_dir_path)
-          inside("#{working_dir}") do
+          inside("#{service_dir_path}") do
             run("source ./load")
+            puts Dir.getwd
           end
         else
           say("Nothing found!", :green)
