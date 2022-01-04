@@ -1,12 +1,15 @@
-require_relative 'load_command'
-
+require_relative 'service_commands'
 module Switcher
   module Commands
-    class Load < Thor 
-      desc "load SERVICE_NAME", "loads a service into path"
-      def load(service_name)
-        Commands::LoadCommand.start([service_name])
+    class LoadCommand < Thor::Group
+      include Thor::Actions
+      include Commands::ServiceCommands
+      argument :service_name, type: :string
+
+      def create_load_command
+        run_load_command
       end
     end
   end
 end
+

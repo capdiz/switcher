@@ -2,6 +2,7 @@ require 'thor'
 require_relative 'cli/motherdir'
 require_relative 'cli/create'
 require_relative 'commands/load'
+require_relative 'commands/deploy'
 
 module Switcher
   module CLI
