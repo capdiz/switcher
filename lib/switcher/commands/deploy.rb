@@ -4,7 +4,7 @@ module Switcher
     class DeployCommand < Thor::Groups
       include Thor::Actions
       include Commands::ServiceCommands
-      argument: :service_name, type: :string
+      argument :service_name, type: :string
 
       def create_deploy_command
         run_deploy_command
