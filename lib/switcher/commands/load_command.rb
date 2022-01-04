@@ -1,9 +1,9 @@
-require_relative 'load_service'
+require_relative 'service_commands'
 module Switcher
   module Commands
     class LoadCommand < Thor::Group
       include Thor::Actions
-      include Commands::LoadService
+      include Commands::ServiceCommands
       argument :service_name, type: :string
 
       def create_load_command

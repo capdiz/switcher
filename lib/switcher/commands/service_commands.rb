@@ -1,13 +1,12 @@
-require 'pathname'
 module Switcher
   module Commands
-    module LoadService
+    module ServiceCommands
       def run_load_command
         if inside_motherdir?
           if service_exists?
             Dir.chdir("#{service_path}/#{service_name}")
             say("Loaded #{Dir.getwd} as your current path..", :green)
-            say("You can now deploy #{service_name} using 'switcher deploy #{service_name}", :white)
+            say("You can now deploy #{service_name} using 'switcher deploy #{service_name}'", :white)
           else
             say("Can't load service #{service_name}. Looks like it isn't an available service", :green)
           end
@@ -17,6 +16,23 @@ module Switcher
         end
       end
 
+      def run_deploy_command
+        if inside_motherdir?
+          if service_exists?
+            Dir.chdir("#{service_path}/#{service_name}")
+            curr_dir = Dir.getwd
+            inside(curr_dir) do
+              run('bundle exec cap production deploy')
+            end
+          else
+            say("Can't load service named #{service_name}. Looks like it isn't availbale within your services.", :green)            
+          end
+        else
+          say("The 'switcher load SERVICE_NAME' command needs to be called from inside a single-mother directory application.", :white)
+          say("Run 'switcher motherdir APP_NAME' to create a new switcher application", :white)          
+        end
+      end
+      
       def service_path
         curr_dir = Dir.getwd
         path = Pathname.new(curr_dir)
@@ -61,6 +77,8 @@ module Switcher
       def service_exists?
         File.exists?("#{service_path}/#{service_name}")
       end
+
     end
   end
 end
+
