@@ -40,13 +40,7 @@ module Switcher
                     end
                   end
                 end
-              end              
-              inside("services") do
-                FileUtils.mkdir(".config")
-                create_load_script
-                create_deploy_script
-                create_run_test_script
-              end
+              end             
             end
           end
         end
@@ -68,7 +62,6 @@ module Switcher
               service_name = ask(MESSAGES["queries"]["service_name"])
               unless service_name.strip.empty?
                 inside("services") do
-                  FileUtils.mkdir(".config") 
                   empty_directory(service_name)
                   inside(service_name) do
                     init_gemfile
@@ -76,60 +69,10 @@ module Switcher
                     define_db_dir_structure
                     add_config_files
                   end
-                  create_load_script
-                  create_deploy_script
-                  create_run_test_script
                 end
               end
             end
           end
-        end
-      end
-
-      def create_load_script
-        config_path = config_folder 
-        if hidden_config_dir_exists?(config_path)
-          inside(config_path) do
-            say(MESSAGES["output_msgs"]["load_script_msg"], :green)
-            create_file "load", "#!/usr/bin/env bash\n"
-            file = "#{config_path}/load"
-            load_script = CLI::Script.new
-            load_script.make_executable(file)
-            load_script.add_load_command(file)
-          end
-        end
-      end
-
-      def create_deploy_script        
-        config_path = config_folder
-        if hidden_config_dir_exists?(config_path)
-          inside(config_path) do
-            say(MESSAGES["output_msgs"]["deploy_script_msg"], :green)
-            create_file "deploy", "#!/usr/bin/env bash\n"
-            file = "#{config_path}/deploy"
-            deploy_script = CLI::Script.new
-            deploy_script.make_executable(file)
-          end
-        end
-      end
-
-      def create_run_test_script
-        config_path = config_folder
-        if hidden_config_dir_exists?(config_path)
-          inside(config_path) do
-            say(MESSAGES["output_msgs"]["run_test_script_msg"], :green)
-            create_file "run_test", "#!/usr/bin/env bash\n"
-            file = "#{destination_root}/run_test"
-            run_test_script = CLI::Script.new
-            run_test_script.make_executable(file)
-          end
-        end
-      end
-
-      def config_folder
-        path = Pathname.new("#{destination_root}")
-        config_folder = Dir.entries("#{path.to_s}").each do |dir|
-          break File.absolute_path(dir) if File.basename(dir) == ".config"
         end
       end
 
@@ -139,22 +82,6 @@ module Switcher
 
       def services_dir_exists?
         File.exists?("#{destination_root}/services")
-      end
-
-      def hidden_config_dir_exists?(path)
-        File.exists?("#{path}")
-      end
-
-      def load_script_exists?
-        File.exists?("#{destination_root}/load")
-      end
-
-      def deploy_script_exists?
-        File.exists?("#{destination_root}/deploy")
-      end
-
-      def run_test_script_exists?
-        File.exists?("#{destination_root}/run_test")
       end
 
       def service_exists?

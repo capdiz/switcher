@@ -12,6 +12,7 @@ module Switcher
       end
       
       def install_gems
+        run('git init')
         run('bundle install')
         init_rspec
         init_capistrano
