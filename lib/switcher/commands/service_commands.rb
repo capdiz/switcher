@@ -77,7 +77,6 @@ module Switcher
       def service_exists?
         File.exists?("#{service_path}/#{service_name}")
       end
-
     end
   end
 end

@@ -18,12 +18,12 @@ module Switcher
 
       desc "load SERVICE_NAME", "load's a service into path"
       def load(service_name)
-        Commands::LoadCommand.start([service_name])
+        Commands::Load.start([service_name])
       end
 
       desc "deploy SERVICE_NAME", "deploy's a service current path to production"
       def deploy(service_name)
-        Commands::DeployCommand.start([service_name])
+        Commands::Deploy.start([service_name])
       end
     end
   end
