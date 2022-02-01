@@ -35,6 +35,7 @@ module Switcher
             mk_controllers_dir
           end
         end
+        mk_config_ru_file
       end
 
       def define_db_dir_structure
@@ -85,6 +86,10 @@ module Switcher
 
       def mk_db_file
         FileUtils.touch("db.yml")
+      end
+
+      def mk_config_ru_file
+        FileUtils.touch("config.ru")
       end
 
       def gemfile_created?
