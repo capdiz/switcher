@@ -3,6 +3,7 @@ require_relative 'cli/motherdir'
 require_relative 'cli/create'
 require_relative 'commands/load'
 require_relative 'commands/deploy'
+require_relative 'commands/start'
 
 module Switcher
   module CLI
@@ -24,6 +25,11 @@ module Switcher
       desc "deploy SERVICE_NAME", "deploy's a service current path to production"
       def deploy(service_name)
         Commands::Deploy.start([service_name])
+      end
+
+      desc "start SERVICE_NAME", "start's a switcher service in development"
+      def start(service_name)
+        Commands::Start.start([service_name])
       end
     end
   end

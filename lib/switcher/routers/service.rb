@@ -1,0 +1,2 @@
+module Switcher
+end

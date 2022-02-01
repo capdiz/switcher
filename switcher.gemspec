@@ -36,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.2"
   spec.add_development_dependency "aruba"
   spec.add_development_dependency "cucumber", "~> 4.1.0"
+  spec.add_development_dependency "rack-test"
   spec.add_dependency "activesupport"
   spec.add_dependency "thor"
   spec.add_dependency "sinatra"

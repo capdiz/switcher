@@ -33,6 +33,22 @@ module Switcher
         end
       end
       
+      def run_start_service_command
+        if inside_motherdir?
+          if service_exists?
+            Dir.chdir("#{service_path}/#{service_name}")
+            curr_dir = Dir.getwd
+            inside(curr_dir) do
+              run('bundle exec rackup -p 3000')
+            end
+          else
+            say("Can't start service named #{service_name}.")
+          end
+        else
+          say("The 'switcher start SERVICE_NAME' command needs to be called from inside a single-mother directory application.", :white)
+        end
+      end
+      
       def service_path
         curr_dir = Dir.getwd
         path = Pathname.new(curr_dir)
